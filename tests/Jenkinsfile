@@ -19,6 +19,7 @@ pipeline{
                 //cloner son dossier
                 sh "git clone https://github.com/Ausni/Playwright_jenkins.git repo"
             }
+        }
         stage("vérifier la version")
             {
                 steps{
