@@ -11,20 +11,32 @@ pipeline{
     // npm install
     // npx playwright test --project=chromium --grep=@smoke
     stages {
-        stage("demmarer le projets"){
+        stage("cloner le repo"){
             steps{
                 //creer supprimer le repo
                 sh "rm -rf repo "
               
                 //cloner son dossier
                 sh "git clone https://github.com/Ausni/Playwright_jenkins.git repo"
-             
+            }
+        stage("vérifier la version")
+            {
+                steps{
                 sh "echo 'node --version' "
-                sh  dir('repo'){
-                    sh"npm install"
-                    sh "npx playwright test --project=chromium"
+                sh "echo 'npx playwright --version'"
                 }
-             }
+            }
+         stage("installer les dépendences")
+            {
+                steps{
+                       sh  dir('repo'){
+                            sh"npm install"
+                            sh "npx playwright test --project=chromium"
+                        }
+                }
+            }
+                
+             
         }
 
         
