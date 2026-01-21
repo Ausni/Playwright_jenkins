@@ -15,16 +15,12 @@ pipeline{
             steps{
                 //creer supprimer le repo
                 sh "rm -rf repo "
-                }
-             steps{
+              
                 //cloner son dossier
                 sh "git clone https://github.com/Ausni/Playwright_jenkins.git repo"
-                }
-             steps {
+             
                 sh "echo 'node --version' "
-                sh "echo 'npx playwright  --version"
-             }
-             steps {
+                sh 
                 dir('repo'){
                     sh"npm install"
                     sh "npx playwright test --project=chromium"
