@@ -1,42 +1,35 @@
-pipeline{
-    // installer l'enviroonement
-    // installer node js
+pipeline {
     agent {
-        docker {image "playwright/chromium:playwright-1.56.1"
+        docker {
+            image 'playwright/chromium:playwright-1.56.1'
             args '--user=root --entrypoint=""'
         }
     }
 
-    // git clone
-    // npm install
-    // npx playwright test --project=chromium --grep=@smoke
     stages {
-        // stage("demmarer le projets"){
-        //     steps{
-        //         //creer supprimer le repo
-        //         sh "rm -rf repo "
-        //         //cloner son dossier
-        //         sh "git clone https://github.com/Ausni/Playwright_jenkins.git repo"
-        //     }
-        // }
-        stage("vérifier la version")
-            {
-                steps{
-                sh "node --version "
-                sh "npx playwright  --version"
-             }
+        stage('Display versions') {
+            steps {
+                sh 'node --version'
+                sh 'npm --version'
             }
-        stage("initialiser le project"){
-             steps {
-                dir('repo'){
+        }
+        stage(" CLONE DU PROJET"){
+            steps{
+                sh 'apt-get update && apt-get install -y git'
+                sh "rm -rf repo"
+                echo 'version du git'
+                sh 'git --version'
+                sh "git clone https://github.com/admanehocine/PlaywrightJenkins.git repo"
+                sh "ls -la repo"
+                  dir('repo'){
                     sh "npm install"
                     sh "npx playwright install"
                     sh "npx playwright test --project=chromium"
                 }
-             }
+            }
         }
-
         
+      
     }
-
+   
 }
