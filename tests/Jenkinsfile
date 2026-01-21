@@ -13,8 +13,8 @@ pipeline{
     stages {
         stage("cloner le repo"){
             steps{
-                //creer supprimer le repo
-                sh "rm -rf repo "
+                //supprimer le repo
+               // sh "rm -rf repo "
               
                 //cloner son dossier
                 sh "git clone https://github.com/Ausni/Playwright_jenkins.git repo"
