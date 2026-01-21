@@ -1,4 +1,4 @@
-pipline{
+pipeline{
     // installer l'enviroonement
     // installer node js
     agent {
@@ -11,28 +11,48 @@ pipline{
     // npm install
     // npx playwright test --project=chromium --grep=@smoke
     stages {
-        stage("demmarer le projets"){
+
+        stage ("vérifie si ubuntu est installer")
+        {
             steps{
-                //creer supprimer le repo
+                sh "echo 'ubuntu --version'"
+            }
+        }
+
+        stage ("installer git")
+        {
+            steps{
+                sh "sudo apt install git-all"
+            }
+        }
+        stage("cloner le repo"){
+            steps{
+                //supprimer le repo
                 sh "rm -rf repo "
-                }
-             steps{
+              
                 //cloner son dossier
                 sh "git clone https://github.com/Ausni/Playwright_jenkins.git repo"
-                }
-             steps {
+            }
+        }
+        stage("vérifier la version")
+            {
+                steps{
                 sh "echo 'node --version' "
-                sh "echo 'npx playwright  --version"
-             }
-             steps {
-                dir('repo'){
-                    sh"npm install"
-                    sh "npx playwright test --project=chromium"
+                sh "echo 'npx playwright --version'"
                 }
-             }
+            }
+         stage("installer les dépendences")
+            {
+                steps{
+                       sh  dir('repo'){
+                            sh"npm install"
+                            sh "npx playwright test --project=chromium"
+                        }
+                }
+            }
+                
+             
         }
 
         
     }
-
-}
