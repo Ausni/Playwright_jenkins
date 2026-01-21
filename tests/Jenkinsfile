@@ -20,8 +20,7 @@ pipeline{
                 sh "git clone https://github.com/Ausni/Playwright_jenkins.git repo"
              
                 sh "echo 'node --version' "
-                sh 
-                dir('repo'){
+                sh  dir('repo'){
                     sh"npm install"
                     sh "npx playwright test --project=chromium"
                 }
