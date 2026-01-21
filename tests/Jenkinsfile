@@ -23,7 +23,7 @@ pipeline{
             {
                 steps{
                 sh "echo 'node --version' "
-                sh "echo 'npx playwright  --version"
+                sh "echo 'npx playwright  --version'"
              }
             }
         stage("initialiser le project"){
