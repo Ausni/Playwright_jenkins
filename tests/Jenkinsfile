@@ -1,4 +1,4 @@
-pipline{
+pipeline{
     // installer l'enviroonement
     // installer node js
     agent {
