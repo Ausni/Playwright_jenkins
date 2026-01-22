@@ -5,7 +5,7 @@ pipeline {
             args '--user=root --entrypoint=""'
         }
         parameters {
-            choice(name:"navigateur",choices:{"chromium","webkit","firefox"},defaultValue:"chromium",description:"selectionner un navigateur  pour le test")
+            choice(name:"navigateur",choices:["chromium","webkit","firefox"],defaultValue:"chromium",description:"selectionner un navigateur  pour le test")
 
         }
     }
