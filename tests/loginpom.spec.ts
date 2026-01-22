@@ -16,7 +16,7 @@ test.afterEach(async ({ page }) => {
 });
 
 
-test("login valid", { tag: "@regression" }, async ({ page }) => {
+test("login valid", { tag: "@valid" }, async ({ page }) => {
     await loginPage.setUsername("standard_user");
     await loginPage.setPassword("secret_sauce");
     await loginPage.loginBtn();
