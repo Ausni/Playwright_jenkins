@@ -32,7 +32,7 @@ pipeline {
                     script{
                         if(params.navigateur=="chromium")
                         {
-                             sh "npx playwright test --project=chromium --grep 'regression' "
+                             sh "npx playwright test --project=chromium  "
                         }
                     }
                    
