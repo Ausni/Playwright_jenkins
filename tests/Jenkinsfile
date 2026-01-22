@@ -27,12 +27,14 @@ pipeline {
                 sh "git clone https://github.com/Ausni/Playwright_jenkins.git repo"
                 sh "ls -la repo"
                   dir('repo'){
-                    sh "npm install"
-                    sh "npx playwright install"
+                    // sh "npm install"
+                    // sh "npx playwright install"
+                    sh "npm ci"
                     script{
                         if(params.navigateur=="chromium")
                         {
-                             sh "npx playwright test --project=chromium --grep '@smoke' "
+                             sh "npx playwright test --project=chromium --grep '@smoke' --reporter=allure-playwright"
+                             stash name: 'allure-results', includes: 'allure-results/*'
                         }
                     }
                    
@@ -48,7 +50,13 @@ pipeline {
         //always
         success{
             script{
-                build job:'job_valide'
+                // build job:'job_valide'
+                sh 'rm -rf allure-results/*'
+                unstash 'allure-results'
+                archiveArtifacts 'allure-results/*'
+                allure includeProperties: false,
+                jdk: '',       
+                results: [[path: 'allure-results/']]
                 }
             }
         }
