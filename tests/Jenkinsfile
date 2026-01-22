@@ -48,8 +48,9 @@ pipeline {
     post {
         // always;success;faillure
         //always
-        success{
+        always{
             script{
+                dir('repo'){
                 // build job:'job_valide'
                 sh 'rm -rf allure-results/*'
                 unstash 'allure-results'
@@ -57,6 +58,8 @@ pipeline {
                 allure includeProperties: false,
                 jdk: '',       
                 results: [[path: 'allure-results/']]
+                }
+                
                 }
             }
         }
