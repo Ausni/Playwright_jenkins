@@ -25,8 +25,8 @@ pipeline {
                 echo 'version du git'
                 sh 'git --version'
                 sh "git clone https://github.com/admanehocine/PlaywrightJenkins.git repo1"
-                sh "ls -la repo"
-                  dir('repo'){
+                sh "ls -la repo1"
+                  dir('repo1'){
                     sh "npm install"
                     sh "npx playwright install"
                     script{
