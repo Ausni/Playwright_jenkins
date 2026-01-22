@@ -32,7 +32,7 @@ pipeline {
                     script{
                         if(params.navigateur=="chromium")
                         {
-                             sh "npx playwright test --project=chromium --grep 'smoke' "
+                             sh "npx playwright test --project=chromium --grep 'valid' "
                         }
                     }
                    
@@ -43,15 +43,4 @@ pipeline {
       
     }
    
-    post {
-        // always;success;faillure
-        //always
-        success{
-            script{
-                build job:'job_valide'
-                }
-            }
-        }
-
-
 }
