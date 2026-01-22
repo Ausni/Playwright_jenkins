@@ -24,7 +24,7 @@ pipeline {
                 sh "rm -rf repo"
                 echo 'version du git'
                 sh 'git --version'
-                sh "git clone https://github.com/admanehocine/PlaywrightJenkins.git repo"
+                sh "git clone https://github.com/Ausni/Playwright_jenkins.git repo"
                 sh "ls -la repo"
                   dir('repo'){
                     sh "npm install"
