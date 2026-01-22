@@ -4,6 +4,10 @@ pipeline {
             image 'playwright/chromium:playwright-1.56.1'
             args '--user=root --entrypoint=""'
         }
+        parameters {
+            choice(name:"navigateur",choices:{"chromium","webkit","firefox"},defaultValue:"chromium",description:"selectionner un navigateur  pour le test")
+
+        }
     }
 
     stages {
@@ -24,7 +28,13 @@ pipeline {
                   dir('repo'){
                     sh "npm install"
                     sh "npx playwright install"
-                    sh "npx playwright test --project=chromium"
+                    script{
+                        if(params.navigateur=="chromium")
+                        {
+                             sh "npx playwright test --project=chromium"
+                        }
+                    }
+                   
                 }
             }
         }
